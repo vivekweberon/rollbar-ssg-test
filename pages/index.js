@@ -63,6 +63,7 @@ export default function Home() {
           strategy="lazyOnload"
           onError={(e) => logResourceLoadError(e.currentTarget)}
         />
+      <script src={`/js/config.js`} onerror="logResourceLoadError(this)"></script>
       </main>
     </>
   );
