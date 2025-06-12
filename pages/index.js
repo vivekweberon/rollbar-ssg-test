@@ -48,6 +48,12 @@ export default function Home() {
           width={200}
           onError={(e) => logResourceLoadError(e.currentTarget)}
         />
+        <img
+          src="/assets/missing-image.png"
+          alt="Broken"
+          width={200}
+          onError={() => logResourceLoadError({ src: "/assets/missing-image.png" })}
+        />
         <Script
           src="/assets/missing-before.js"
           strategy="beforeInteractive"
