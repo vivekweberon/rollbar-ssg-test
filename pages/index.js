@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 
@@ -8,6 +9,12 @@ export async function getStaticProps() {
 }
 
 export default function Home() {
+  const [showImages, setShowImages] = useState(false);
+
+  useEffect(() => {
+    setShowImages(true);
+  }, []);
+
   return (
     <>
       <Head>
@@ -42,18 +49,22 @@ export default function Home() {
 
       <main style={{ padding: 40 }}>
         <h1>Rollbar SSG Test</h1>
-        <img
-          src="/assets/missing-image.png"
-          alt="Broken"
-          width={200}
-          onError={(e) => logResourceLoadError(e.currentTarget)}
-        />
-        <img
-          src="/assets/missing-image.png"
-          alt="Broken"
-          width={200}
-          onError={() => logResourceLoadError({ src: "/assets/missing-image.png" })}
-        />
+        {showImages && (
+          <>
+            <img
+              src="/assets/missing-image.png"
+              alt="Broken"
+              width={200}
+              onError={(e) => logResourceLoadError(e.currentTarget)}
+            />
+            <img
+              src="/assets/missing-image.png"
+              alt="Broken"
+              width={200}
+              onError={() => logResourceLoadError({ src: "/assets/missing-image.png" })}
+            />
+          </>
+        )}
         <Script
           src="/assets/missing-before.js"
           strategy="beforeInteractive"
@@ -69,7 +80,11 @@ export default function Home() {
           strategy="lazyOnload"
           onError={(e) => logResourceLoadError(e.currentTarget)}
         />
-      <script src={`/js/config.js`} onerror="logResourceLoadError(this)"></script>
+        <Script
+          src="/js/config.js"
+          strategy="afterInteractive"
+          onError={() => logResourceLoadError({ src: "/js/config.js" })}
+        />
       </main>
     </>
   );
