@@ -15,6 +15,18 @@ export default function Home() {
   //   setShowImages(true);
   // }, []);
 
+  function logResourceLoadError(event) {
+    console.log("logResourceLoadError called with event - server", event);
+    let src = event?.currentTarget?.src || event?.target?.src || event?.srcElement?.src || "unknown";
+    let err = "Error loading: '" + src + "'";
+    if (window.Rollbar) {
+      Rollbar.error(err);
+    } else {
+      console.log(err);
+    }
+    return false;
+  }
+
   function handleImageError(e) {
     e.target.onerror = null;
     e.target.src = "https://example.com/fallback.jpg";
