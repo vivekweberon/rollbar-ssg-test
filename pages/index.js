@@ -15,11 +15,19 @@ export default function Home() {
   //   setShowImages(true);
   // }, []);
 
-  function logResourceLoadError(event) {
-    console.log("logResourceLoadError called with event - server", event);
-    let src = event?.currentTarget?.src || event?.target?.src || event?.srcElement?.src || "unknown";
-    let err = "Error loading: '" + src + "'";
+  // function logResourceLoadError(event) {
+  //   console.log("logResourceLoadError called with event - server", event);
+  //   let src = event?.currentTarget?.src || event?.target?.src || event?.srcElement?.src || "unknown";
+  //   let err = "Error loading: '" + src + "'";
+  //   Rollbar.error(err);
+  //   return false;
+  // }
+
+  function logResourceLoadError(ref) {
+    console.log("logResourceLoadError called with ref - client", ref);
+    let err = "Error loading: '"+ (ref.src || ref.href) +"'";
     Rollbar.error(err);
+    console.log(err);
     return false;
   }
 
