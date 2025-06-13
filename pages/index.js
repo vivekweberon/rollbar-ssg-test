@@ -32,24 +32,17 @@ export default function Home() {
     <>
       <Head>
         <title>Rollbar Resource Test</title>
-        <link
+        {/* <link
           rel="stylesheet"
           href="/assets/missing-style.css"
           onError={() => {
               logResourceLoadError({ href: "/assets/missing-style.css" });
           }}
-        />
+        /> */}
         <link
           rel="stylesheet"
           href={`/assets/lpStyle11.css`}
           onerror="logResourceLoadError(this)"
-        />
-        <link
-          rel="icon"
-          href="/assets/missing-favicon.ico"
-          onError={() => {
-              logResourceLoadError({ href: "/assets/missing-favicon.ico" });
-          }}
         />
       </Head>
 
@@ -58,7 +51,7 @@ export default function Home() {
 
       <main style={{ padding: 40 }}>
         <h1>Rollbar SSG Test</h1>
-            <img
+            {/* <img
               src="/assets/missing-image.png"
               alt="Broken"
               width={200}
@@ -69,13 +62,13 @@ export default function Home() {
               alt="Broken"
               width={200}
               onError={() => logResourceLoadError({ src: "/assets/missing-image.png" })}
-            />
+            /> */}
             <img
               src="https://example.com/broken.jpg"
               onError={logResourceLoadError}
               alt="Broken"
             />
-            <img
+            {/* <img
               src="/assets/missing-image.png"
               alt="Broken"
               width={200}
@@ -83,7 +76,7 @@ export default function Home() {
                 console.log("Image error triggered", e);
                 logResourceLoadError(e);
               }}
-            />
+            /> */}
         <Script
           src="/assets/missing-before.js"
           strategy="beforeInteractive"
@@ -93,16 +86,6 @@ export default function Home() {
           src="/assets/missing-after.js"
           strategy="afterInteractive"
           onError={(e) => logResourceLoadError(e.currentTarget)}
-        />
-        <Script
-          src="/assets/missing-lazy.js"
-          strategy="lazyOnload"
-          onError={(e) => logResourceLoadError(e.currentTarget)}
-        />
-        <Script
-          src="/js/config.js"
-          strategy="afterInteractive"
-          onError={() => logResourceLoadError({ src: "/js/config.js" })}
         />
       <script src="/js/config.js" onerror="logResourceLoadError(this)"></script>
       </main>
