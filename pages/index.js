@@ -64,7 +64,7 @@ export default function Home() {
             />
             <img
               src="https://example.com/broken.jpg"
-              onError={handleImageError}
+              onError={logResourceLoadError}
               alt="Broken"
             />
         <Script
