@@ -67,13 +67,13 @@ export default function Home() {
     <>
       <Head>
         <title>Rollbar Resource Test</title>
-        <link
+        {/* <link
           rel="stylesheet"
           href="/assets/missing-style.css"
           onError={() => {
               logResourceLoadError({ href: "/assets/missing-style.css" });
           }}
-        />
+        /> */}
         <link
           rel="stylesheet"
           href={`/assets/lpStyle11.css`}
@@ -122,7 +122,7 @@ export default function Home() {
           strategy="afterInteractive"
           onError={logResourceLoadError}
         />
-      <script src="/js/config.js" onError={logResourceLoadError} ></script>
+      <script src="/js/config.js" onerror="logResourceLoadError(this)" ></script>
       </main>
     </>
   );
