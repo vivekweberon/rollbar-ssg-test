@@ -23,13 +23,40 @@ export default function Home() {
   //   return false;
   // }
 
-  function logResourceLoadError(ref) {
-    console.log("logResourceLoadError called with ref - client", ref);
-    let err = "Error loading: '"+ (ref.src || ref.href) +"'";
-    Rollbar.error(err);
+  // function logResourceLoadError(ref) {
+  //   console.log("logResourceLoadError called with ref - client", ref);
+  //   let err = "Error loading: '"+ (ref.src || ref.href) +"'";
+  //   Rollbar.error(err);
+  //   console.log(err);
+  //   return false;
+  // }
+
+  function logResourceLoadError(input) {
+    let src = "unknown";
+
+    // If called with an event object (e.g., from onError handler)
+    if (input?.target || input?.currentTarget || input?.srcElement) {
+      console.log("logResourceLoadError called with event - server", input);
+      src = input.currentTarget?.src || input.target?.src || input.srcElement?.src || "unknown";
+    } 
+    // If called with a direct ref (like an img or link element)
+    else if (input?.src || input?.href) {
+      console.log("logResourceLoadError called with ref - client", input);
+      src = input.src || input.href || "unknown";
+    } 
+    // Fallback
+    else {
+      console.log("logResourceLoadError called with unknown input", input);
+    }
+
+    const err = `Error loading: '${src}'`;
+    if (typeof Rollbar !== "undefined" && Rollbar.error) {
+      Rollbar.error(err);
+    }
     console.log(err);
     return false;
   }
+
 
   function handleImageError(e) {
     e.target.onerror = null;
