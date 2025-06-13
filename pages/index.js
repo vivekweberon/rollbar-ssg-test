@@ -19,11 +19,7 @@ export default function Home() {
     console.log("logResourceLoadError called with event - server", event);
     let src = event?.currentTarget?.src || event?.target?.src || event?.srcElement?.src || "unknown";
     let err = "Error loading: '" + src + "'";
-    if (window.Rollbar) {
-      Rollbar.error(err);
-    } else {
-      console.log(err);
-    }
+    Rollbar.error(err);
     return false;
   }
 
@@ -78,6 +74,15 @@ export default function Home() {
               src="https://example.com/broken.jpg"
               onError={logResourceLoadError}
               alt="Broken"
+            />
+            <img
+              src="/assets/missing-image.png"
+              alt="Broken"
+              width={200}
+              onError={(e) => {
+                console.log("Image error triggered", e);
+                logResourceLoadError(e);
+              }}
             />
         <Script
           src="/assets/missing-before.js"
