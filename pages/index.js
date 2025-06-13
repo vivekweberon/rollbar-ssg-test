@@ -115,12 +115,12 @@ export default function Home() {
         <Script
           src="/assets/missing-before.js"
           strategy="beforeInteractive"
-          onError={(e) => logResourceLoadError(e.currentTarget)}
+          onError={logResourceLoadError}
         />
         <Script
           src="/assets/missing-after.js"
           strategy="afterInteractive"
-          onError={(e) => logResourceLoadError(e.currentTarget)}
+          onError={logResourceLoadError}
         />
       <script src="/js/config.js" onError={logResourceLoadError} ></script>
       </main>
