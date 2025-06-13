@@ -77,7 +77,7 @@ export default function Home() {
         <link
           rel="stylesheet"
           href={`/assets/lpStyle11.css`}
-          onError={logResourceLoadError}
+          onerror="logResourceLoadError(this)"
         />
       </Head>
 
