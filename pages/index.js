@@ -87,7 +87,7 @@ export default function Home() {
           strategy="afterInteractive"
           onError={() => logResourceLoadError({ src: "/js/config.js" })}
         />
-      <script src={`${basePath}/js/config.js`} onerror="logResourceLoadError(this)"></script>
+      <script src="/js/config.js" onerror="logResourceLoadError(this)"></script>
       </main>
     </>
   );
