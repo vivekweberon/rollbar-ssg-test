@@ -42,7 +42,7 @@ export default function Home() {
         <link
           rel="stylesheet"
           href={`/assets/lpStyle11.css`}
-          onerror="logResourceLoadError(this)"
+          onError={logResourceLoadError}
         />
       </Head>
 
@@ -87,7 +87,7 @@ export default function Home() {
           strategy="afterInteractive"
           onError={(e) => logResourceLoadError(e.currentTarget)}
         />
-      <script src="/js/config.js" onerror="logResourceLoadError(this)"></script>
+      <script src="/js/config.js" onError={logResourceLoadError} ></script>
       </main>
     </>
   );
