@@ -67,13 +67,13 @@ export default function Home() {
     <>
       <Head>
         <title>Rollbar Resource Test</title>
-        <link
+        {/* <link
           rel="stylesheet"
           href="/assets/missing-style.css"
           onError={() => {
               logResourceLoadError({ href: "/assets/missing-style.css" });
           }}
-        />
+        /> */}
         {/* <link
           rel="stylesheet"
           href={`/assets/lpStyle11.css`}
