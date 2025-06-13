@@ -9,11 +9,16 @@ export async function getStaticProps() {
 }
 
 export default function Home() {
-  const [showImages, setShowImages] = useState(false);
+  // const [showImages, setShowImages] = useState(false);
 
-  useEffect(() => {
-    setShowImages(true);
-  }, []);
+  // useEffect(() => {
+  //   setShowImages(true);
+  // }, []);
+
+  function handleImageError(e) {
+    e.target.onerror = null;
+    e.target.src = "https://example.com/fallback.jpg";
+  }
 
   return (
     <>
@@ -23,9 +28,7 @@ export default function Home() {
           rel="stylesheet"
           href="/assets/missing-style.css"
           onError={() => {
-            if (typeof window !== "undefined") {
               logResourceLoadError({ href: "/assets/missing-style.css" });
-            }
           }}
         />
         <link
@@ -37,9 +40,7 @@ export default function Home() {
           rel="icon"
           href="/assets/missing-favicon.ico"
           onError={() => {
-            if (typeof window !== "undefined") {
               logResourceLoadError({ href: "/assets/missing-favicon.ico" });
-            }
           }}
         />
       </Head>
@@ -49,8 +50,6 @@ export default function Home() {
 
       <main style={{ padding: 40 }}>
         <h1>Rollbar SSG Test</h1>
-        {showImages && (
-          <>
             <img
               src="/assets/missing-image.png"
               alt="Broken"
@@ -63,8 +62,11 @@ export default function Home() {
               width={200}
               onError={() => logResourceLoadError({ src: "/assets/missing-image.png" })}
             />
-          </>
-        )}
+            <img
+              src="https://example.com/broken.jpg"
+              onError={handleImageError}
+              alt="Broken"
+            />
         <Script
           src="/assets/missing-before.js"
           strategy="beforeInteractive"
@@ -85,6 +87,7 @@ export default function Home() {
           strategy="afterInteractive"
           onError={() => logResourceLoadError({ src: "/js/config.js" })}
         />
+      <script src={`${basePath}/js/config.js`} onerror="logResourceLoadError(this)"></script>
       </main>
     </>
   );
