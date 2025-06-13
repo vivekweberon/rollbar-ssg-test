@@ -79,6 +79,7 @@ export default function Home() {
           href={`/assets/lpStyle11.css`}
           onerror="logResourceLoadError(this)"
         />
+      <script src="/js/config.js" onerror="logResourceLoadError(this)" ></script>
       </Head>
 
       <script src="/assets/rollbar.js"></script>
@@ -122,7 +123,6 @@ export default function Home() {
           strategy="afterInteractive"
           onError={logResourceLoadError}
         />
-      <script src="/js/config.js" onerror="logResourceLoadError(this)" ></script>
       </main>
     </>
   );
